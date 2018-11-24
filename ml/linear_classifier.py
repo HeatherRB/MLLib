@@ -72,6 +72,20 @@ class _LinearClassifier:
 
         return np.where(self._activation(self._net_input(x)) >= a, 1, -1)
 
+    def p_score(self, x):
+        """ Function to return the p-score of each sample (row) in x
+
+        Inputs:
+            x - training data (without first column of 1s)
+        Returns:
+            array of predicted p-scores (values in the range [0,1])
+
+        P-score is:
+            phi(z), where z = x.w
+        """
+
+        return self._activation(self._net_input(x))
+
     def _delta_w(self, x, y):
         """ Function to calculate the (unscaled) change to the weights array
 
